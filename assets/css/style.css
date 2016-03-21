@@ -132,7 +132,11 @@ hr {
     flex-direction: row;
 }
 
-.item-viewers {
+.game-name {
+    font-weight: bold;
+}
+
+.viewers {
     margin-left: 10px;
 }
 

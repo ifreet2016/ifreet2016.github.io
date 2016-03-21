@@ -7,7 +7,7 @@ function displayResult(panelId, data) {
     if (document.getElementById('item-container')) {
         // remove extra items and update all items.
         updateSearchList(data);
-        // updatePagination(data);
+        updatePagination(data);
     } else {
         createSearchList(panelId, data);
     }
@@ -68,10 +68,12 @@ function createSearchList(panelId, data) {
     }, false);
 
     resultNumDiv.appendChild(document.createTextNode('Total results: ' + data._total));
-    paginationDiv.appendChild(leftArrow);
-    pageNumber.appendChild(document.createTextNode('1/' + totalPageNumber));
-    paginationDiv.appendChild(pageNumber);
-    paginationDiv.appendChild(rightArrow);
+    if (totalPageNumber) {
+        paginationDiv.appendChild(leftArrow);
+        pageNumber.appendChild(document.createTextNode('1/' + totalPageNumber));
+        paginationDiv.appendChild(pageNumber);
+        paginationDiv.appendChild(rightArrow);
+    }
 
     topBarDiv.appendChild(resultNumDiv);
     topBarDiv.appendChild(paginationDiv);
@@ -139,8 +141,7 @@ function updateSearchList(data) {
         streamNumber = data.streams.length;
 
     if (data.streams.length === 0) {
-        document.querySelector('.result-number').innerHTML = 'Total results: 0'; //edit
-        // Display some banner to inform user
+        document.querySelector('.result-number').innerHTML = 'Total results: ' + data._total; //edit
     } else {
         munipulateItems(containerDiv, streamNumber - itemLength);
         // Update item Content
@@ -167,40 +168,43 @@ function updatePagination(data) {
         paginationDiv.removeChild(paginationDiv.firstChild);
     }
 
-    pageNumber.innerHTML = '1/' + totalPageNumber;
     leftArrow.className = "left-arrow";
     rightArrow.className = "right-arrow";
 
+    paginationDiv.appendChild(leftArrow);
+    pageNumber.appendChild(document.createTextNode(currentPage + '/' + totalPageNumber));
+    paginationDiv.appendChild(pageNumber);
+    paginationDiv.appendChild(rightArrow);
+
     leftArrow.addEventListener('click', function(event) {
         event.preventDefault();
-        alert("Oh GOD");
-        // console.log('data: ', data);
-        // if (typeof data._links.prev !== 'undefined') {
-        //     JSONP.get(data._links.prev + '&callback=updateResults', function(updatedData) {
-        //         if (currentPage > 1) {
-        //             data = updatedData;
-        //             updateSearchList(updatedData);
-        //             currentPage--;
-        //             pageNumber.innerHTML = currentPage + '/' + totalPageNumber;
-        //         }
-        //     });
-        // }
+        if (typeof data._links.prev !== 'undefined') {
+            JSONP.get(data._links.prev + '&callback=updateResults', function(updatedData) {
+                if (currentPage > 1) {
+                    data = updatedData;
+                    updateSearchList(updatedData);
+                    currentPage--;
+                    pageNumber.innerHTML = currentPage + '/' + totalPageNumber;
+                }
+            });
+        }
     }, false);
 
     rightArrow.addEventListener('click', function(event) {
         event.preventDefault();
-        alert("Oh My GOD");
-        // if (typeof data._links.next !== 'undefined') {
-        //     JSONP.get(data._links.next + '&callback=updateResults', function(updatedData) {
-        //         if (updatedData._links.hasOwnProperty('next') && currentPage < totalPageNumber) { //prev exists
-        //             data = updatedData;
-        //             updateSearchList(updatedData);
-        //             currentPage++;
-        //             pageNumber.innerHTML = currentPage + '/' + totalPageNumber;
-        //         }
-        //     });
-        // }
+        if (typeof data._links.next !== 'undefined') {
+            JSONP.get(data._links.next + '&callback=updateResults', function(updatedData) {
+                if (updatedData._links.hasOwnProperty('next') && currentPage < totalPageNumber) { //prev exists
+                    data = updatedData;
+                    updateSearchList(updatedData);
+                    currentPage++;
+                    pageNumber.innerHTML = currentPage + '/' + totalPageNumber;
+                }
+            });
+        }
     }, false);
+
+
 
 }
 

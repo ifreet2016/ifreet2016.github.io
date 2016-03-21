@@ -11,3 +11,6 @@
 Twitch API returns inconsistence results
 
 [Twitch-API issue 513](https://github.com/justintv/Twitch-API/issues/513)
+
+## First release
+3/21 v0.1

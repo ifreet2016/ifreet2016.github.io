@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <img src="assets/img/twitch-logo.png" alt="Twitch">
+        <img id='twitch-logo' src="assets/img/twitch-logo.png" alt="Twitch">
         <div class="search-group">
             <input type='text' id='search-input' placeholder="Search streams">
             <button id='search-btn'>Search</button>
@@ -17,8 +17,9 @@
     <hr>
     <div id='result-panel'></div>
     <script>
-    var searchBox = document.getElementById('search-input');
-    var searchBtn = document.getElementById('search-btn');
+    var logo = document.getElementById('twitch-logo'),
+        searchBox = document.getElementById('search-input'),
+        searchBtn = document.getElementById('search-btn');
 
     searchBtn.addEventListener('click', function() {
         if (searchBox.value !== '') {
@@ -30,8 +31,15 @@
         }
     }, false);
 
+    logo.addEventListener('click', function() {
+        console.log("I love Twitch");
+    }, false);
+
+    /**
+     * JSONP callback, returns stream data
+     * @param {Object} data JSON data
+     */
     function getStreamData(data) {
-        console.log(data);
         displayResult('result-panel', data);
     }
 

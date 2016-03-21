@@ -21,7 +21,7 @@ header .search-group {
 }
 
 input[type=text] {
-    width: 400px;
+    width: 60%;
     height: 40px;
     padding: 12px 20px;
     display: inline-block;

@@ -1,0 +1,141 @@
+body {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+header {
+    margin-top: 10px;
+}
+
+header img {
+    width: 93px;
+    height: 32px;
+    margin: 20px 0px;
+}
+
+header .search-group {
+    display: inline;
+    float: right;
+    padding: 15px;
+}
+
+input[type=text] {
+    width: 400px;
+    height: 40px;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #6441A5;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+input[type=text]:focus {
+    outline: none;
+    box-shadow: 0 0 5px #6441A5;
+    font-size: 14px;
+}
+
+#search-btn {
+    background: #6441A5;
+    color: #ffffff;
+    padding: 0 10px;
+    font-size: 14px;
+    border: none;
+    height: 40px;
+    width: 100px;
+    outline: none;
+}
+
+#search-btn:hover {
+    background-color: #7D5BBE;
+    outline: none;
+    cursor: pointer;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0px;
+    background-color: #6441A5;
+}
+
+#top-bar {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 20px;
+}
+
+.result-number {
+    float: left;
+    font-size: 18px;
+}
+
+.top-paging {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    width: 80px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.left-arrow {
+    border-top: 10px solid transparent;
+    border-right:10px solid black;
+	border-bottom: 10px solid transparent;
+    width: 0;
+	height: 0;
+    cursor: pointer;
+}
+
+.right-arrow {
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid black;
+    width: 0;
+	height: 0;
+    cursor: pointer;
+}
+
+#result-panel {
+    padding: 10px;
+}
+
+#item-container {
+    padding: 10px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    /*height: 100px;*/
+    margin-top: 10px;
+}
+
+.item-right-col {
+    margin-left: 30px;
+}
+
+.item-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-viewers {
+    margin-left: 10px;
+}
+
+.item-description {
+    margin-top: 15px;
+}
